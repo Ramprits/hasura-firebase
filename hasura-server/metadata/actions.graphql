@@ -1,0 +1,38 @@
+type Mutation {
+  create_user (
+    credentials: UserInput!
+  ): UserOutput
+}
+
+
+type Mutation {
+  user_login (
+    credentials: UserInput!
+  ): LoginOutput
+}
+
+
+type Mutation {
+  user_profile (
+    id: String!
+  ): UserOutput
+}
+
+
+
+
+input UserInput {
+  email : String!
+  password : String!
+}
+
+type UserOutput {
+  id : String!
+  email : String
+  displayName : String
+}
+
+type LoginOutput {
+  accessToken : String!
+}
+

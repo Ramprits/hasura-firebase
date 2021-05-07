@@ -1,0 +1,10 @@
+- name: allowed-queries
+  definition:
+    queries:
+    - name: login
+      query: |-
+        mutation login($email: String!, $password: String! ) {
+          user_login(credentials: {email: $email, password: $password}) {
+            accessToken
+          }
+        }

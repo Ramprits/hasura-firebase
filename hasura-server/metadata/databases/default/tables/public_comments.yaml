@@ -1,0 +1,32 @@
+table:
+  name: comments
+  schema: public
+object_relationships:
+- name: photo
+  using:
+    foreign_key_constraint_on: photo_id
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - comment
+    - photo_id
+    - created_at
+    - updated_at
+    - user_id
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: user
+event_triggers:
+- definition:
+    enable_manual: false
+    insert:
+      columns: "*"
+  name: notify_about_comment
+  retry_conf:
+    interval_sec: 10
+    num_retries: 0
+    timeout_sec: 60
+  webhook: http://host.docker.internal:9000/oclm-app/us-central1/notifyAboutComment

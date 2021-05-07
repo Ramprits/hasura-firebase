@@ -1,0 +1,38 @@
+table:
+  name: photos
+  schema: public
+array_relationships:
+- name: comments
+  using:
+    foreign_key_constraint_on:
+      column: photo_id
+      table:
+        name: comments
+        schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      user_id:
+        _eq: X-Hasura-User-Id
+    columns:
+    - description
+    - photo_url
+    - user_id
+    set:
+      user_id: x-hasura-user-id
+  role: user
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - photo_url
+    - description
+    - created_at
+    - updated_at
+    - user_id
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: user

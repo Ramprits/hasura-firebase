@@ -1,0 +1,6 @@
+- "!include public_categories.yaml"
+- "!include public_comments.yaml"
+- "!include public_orders.yaml"
+- "!include public_photos.yaml"
+- "!include public_status.yaml"
+- "!include public_users.yaml"
